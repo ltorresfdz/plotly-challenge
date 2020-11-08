@@ -21,15 +21,39 @@ function tableInfo(numID){
     Object.entries(result).forEach(([key,value]) => {
         TABLA.append("h6").text(`${key}:${value}`);
     });
- }
- )
+ })
 }
 
 function chartInfo(numID){
+    d3.json("samples.json").then((data) => {
+        var samples= data.samples;
+        var selectedInfo= samples.filter(sample => sample.id == numID);
+        var result =selectedInfo[0]
+        var ids =result.otu_ids;
+        var labels = result.otu_labels;
+        var values =result.sample_values;
+
+  // Bar chart
+  
+  var dataBar = [
+    {
+      y:ids.slice(0,10).map(otuID => `OTU ${otuID}` ).reverse(),
+      x:values.slice(0,10).reverse(),
+      text:labels.slice(0,10).reverse(),
+      type:"bar",
+      orientation:"h"
+    }];
+
+  var layoutBar = {
+    title: "Here goes title",
+    margin: { t:25, 1:150}
+  };
+
+  Plotly.newPlot("bar",dataBar,layoutBar);
 
 
 
-
+    });
 }
 
 
@@ -44,14 +68,19 @@ d3.json("samples.json").then((data) => {
 var sampleName= data.names;
 sampleName.forEach((sample)=> {
   option.append("option").text(sample).property("value",sample);
-})
-    
 });
-const initialID =sampleName[0];
+
+console.log(sampleName[0]);
+var initialID =sampleName[0];
+console.log(sampleName[0]);
  chartInfo(initialID);
  tableInfo(initialID);
 
-};
+
+});
+
+
+}
 
 
 //select the new Test ID, and call the functions to build chart and table.
