@@ -3,8 +3,7 @@ d3.json("samples.json").then((data) => {
 var metadata = data.metadata;
 var samples= data.samples;
 var names=data.names;
-console.log("uno")
-
+// console.log("uno")
 // console.log(metadata);
 // console.log(names);
 // console.log(samples);
@@ -113,16 +112,41 @@ console.log(sampleName[0]);
 
 }
 
+function init2(){
+    console.log("si hace algo1")
+    d3.json("samples.json").then((data) => {
+           var metadata= data.metadata;
+           var initialID2 =metadata[0].id;
+           console.log(initialID2)
+           gaugeChart(initialID2);
+           console.log("si hace algo")
+       });
+   }
+
+function gaugeChart(numID2){
+    d3.json("samples.json").then((data) => {
+            var metadata= data.metadata;
+            var selectedInfo2= metadata.filter(sample => sample.id == numID2);
+            var result2 =selectedInfo2[0]
+            var washNumber =result2.wfreq;
+            console.log(washNumber);
+    });
+    }
+ 
+
 
 //select the new Test ID, and call the functions to build chart and table.
 function optionChanged(newID) {
     chartInfo(newID);
     tableInfo(newID);
+    gaugeChart(newID);
    
    }
 
 
+init2();
 init();
+
 
 
 
