@@ -17,6 +17,7 @@ function tableInfo(numID){
     var selectedInfo= metadata.filter(sample => sample.id == numID);
     var result =selectedInfo[0]
     var TABLA =d3.select("#sample-metadata");
+// clear the existing output
     TABLA.html("");
     Object.entries(result).forEach(([key,value]) => {
         TABLA.append("h6").text(`${key}:${value}`);
@@ -45,11 +46,41 @@ function chartInfo(numID){
     }];
 
   var layoutBar = {
-    title: "Here goes title",
+    title: "Top 10 OTUs found in the selected Test Subject" ,
     margin: { t:25, 1:150}
   };
 
   Plotly.newPlot("bar",dataBar,layoutBar);
+
+// Bubble Chart
+
+var trace1 = {
+    x: ids,
+    y: values,
+    text: labels,
+    mode: 'markers',
+    marker: {
+      color: ids,
+      size: values
+    }
+  };
+  
+  var data = [trace1];
+  
+  var layout = {
+    
+    margin: {t:0},
+    xaxis: {title: "OTU Id's"},
+    yaxis: {title: "Sample size"},
+    hovermode: "closest",
+    
+    
+  };
+  
+  Plotly.newPlot("bubble", data, layout);
+
+
+
 
 
 
