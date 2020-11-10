@@ -9,9 +9,11 @@ On the app.js file I worked to develop d3.js & plotly code to read the samples.j
 
 Please be advised that when working on the bonus.js file to develop the gauge chart, I had difficulty to generate correctly the app.js functions to generate table and chart.  It seems that calling the function OptionChanged in both "app.js" and "bonus.js" files, causes a conflict. So I included the function to generate the gauge chart in the app.js file and bonus.js file is no longer required in the html file.  
 
-It was very interesting doing research for the gauge chart code, since it relates to making a pie chart.  I have referenced the source for this in the app.js file.
+It was very interesting doing research for the gauge chart code, since it relates to making a pie chart.  I have referenced the source for this in the app.js file.  
 
-Here is a print screen of the web page using information from Test Subject ID. 974; individual with ZERO washing frequency number, and huge amount of bacteria! 
+Here is the link for the deployed app in GitHub: https://ltorresfdz.github.io/plotly-challenge/
+
+A print screen of the web page using information from Test Subject ID. 974; individual with ZERO washing frequency number, and huge amount of bacterias and probably no hygene habits! 
 
 ![alt text][pic]
 
