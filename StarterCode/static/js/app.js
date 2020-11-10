@@ -1,33 +1,54 @@
+
+//First, checking if I am able to read the data
 d3.json("samples.json").then((data) => {
-    // console.log(data);
+console.log("This is the complete samples json file information")
+console.log(data);
 var metadata = data.metadata;
 var samples= data.samples;
 var names=data.names;
-// console.log("uno")
-// console.log(metadata);
-// console.log(names);
-// console.log(samples);
+console.log("This is metada")
+console.log(metadata);
+console.log("This is names")
+console.log(names);
+console.log("This is samples")
+console.log(samples);
 });
 
 
+
+//This functions displays the Test Subject ID information selected in the table:
+//==================================================================
 function tableInfo(numID){
  d3.json("samples.json").then((data) => {
+    // from samples.json bring only the metadata
     var metadata = data.metadata;
+    // on the metadata, look for the test subject ID selected dictioray
     var selectedInfo= metadata.filter(sample => sample.id == numID);
+   //assign the dictionary selected to result. 
     var result =selectedInfo[0]
+    //select the Table from the HTML file
     var TABLA =d3.select("#sample-metadata");
-// clear the existing output
+    // clear the existing output
     TABLA.html("");
+    //read the dictionary and apped each value to the table:
     Object.entries(result).forEach(([key,value]) => {
         TABLA.append("h6").text(`${key}:${value}`);
     });
  })
 }
 
+
+
+//This functions displays the Test Subject ID information selected in the graph:
+//==================================================================
+
 function chartInfo(numID){
     d3.json("samples.json").then((data) => {
+         // from samples.json bring only the samples info
         var samples= data.samples;
+         // on the samples, look for the test subject ID selected list
         var selectedInfo= samples.filter(sample => sample.id == numID);
+         //assign the dictionary selected to result, and then obtain the dictionaries value.
         var result =selectedInfo[0]
         var ids =result.otu_ids;
         var labels = result.otu_labels;
@@ -105,24 +126,24 @@ var initialID =sampleName[0];
 // console.log(sampleName[0]);
  chartInfo(initialID);
  tableInfo(initialID);
-
-
 });
-
-
 }
 
+//this function creates the initial gauge chart
+
 function init2(){
-    console.log("si hace algo1")
+    console.log("starts init2")
     d3.json("samples.json").then((data) => {
            var metadata= data.metadata;
            var initialID2 =metadata[0].id;
            console.log(initialID2)
            gaugeChart(initialID2);
-           console.log("si hace algo")
+           console.log("finishes init2")
        });
    }
 
+
+//this function creates the gaugeChart
 function gaugeChart(numID2){
     d3.json("samples.json").then((data) => {
             var metadata= data.metadata;
@@ -130,12 +151,11 @@ function gaugeChart(numID2){
             var result2 =selectedInfo2[0]
             var washNumber =result2.wfreq;
             console.log(washNumber);
-    
-
-    var level = parseFloat(washNumber) * 20;
+        var level = parseFloat(washNumber) * 20;
 
 
-    // source: https://community.plotly.com/t/plotly-js-gauge-pie-chart-data-order/8686
+// I obtained the code for the gauge chart from here:
+// source: https://community.plotly.com/t/plotly-js-gauge-pie-chart-data-order/8686
 
     var degrees = 180 - level;
     var radius = 0.5;
@@ -150,11 +170,9 @@ function gaugeChart(numID2){
      pathEnd = ' Z';
     var path = mainPath.concat(pathX,space,pathY,pathEnd);
 
-
+ //create the data variable   
 var data = [
     {
-      
-
       type: "scatter",
       x: [0],
       y: [0],
@@ -163,12 +181,6 @@ var data = [
       name: "Freq",
       text: level,
       hoverinfo: "text+name"
-
-
-
-
-
-
     },
     {
       values: [50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50 / 9, 50],
@@ -201,6 +213,7 @@ var data = [
 
 
   
+ //create the layout variable  
   var layout = {
     
     shapes: [
@@ -229,34 +242,19 @@ var data = [
       range: [-1, 1]
     }
 
-
-
-
-
-
   };
   
   Plotly.newPlot("gauge", data, layout);
 });
 
-
-
-
-
-
-
-
-
-    }
+}
  
-
 
 //select the new Test ID, and call the functions to build chart and table.
 function optionChanged(newID) {
     chartInfo(newID);
     tableInfo(newID);
     gaugeChart(newID);
-   
    }
 
 
