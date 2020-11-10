@@ -15,7 +15,7 @@ Here is a print screen of the web page using information from Test Subject ID. 9
 
 ![alt text][pic]
 
-[pic]: https://github.com/plotly "screen"
+[pic]: https://github.com/ltorresfdz/plotly-challenge/blob/main/Images/screenshot.JPG "screen"
 
 
 
