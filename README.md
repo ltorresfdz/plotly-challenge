@@ -11,7 +11,7 @@ Please be advised that when working on the bonus.js file to develop the gauge ch
 
 It was very interesting doing research for the gauge chart code, since it relates to making a pie chart.  I have referenced the source for this in the app.js file.
 
-Here is a print screen of the web page using information from Test Subject ID. 974; individual with ZERO washing frequency number, and hughe amount of bacteria! 
+Here is a print screen of the web page using information from Test Subject ID. 974; individual with ZERO washing frequency number, and huge amount of bacteria! 
 
 ![alt text][pic]
 
